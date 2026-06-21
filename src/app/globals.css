@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  BramPlan design system — lower-middle-market PE / search-fund feel.
+  Calm, permanent, trustworthy. Deep ink + warm cream + restrained bronze.
+*/
+@theme {
+  --color-ink: #16232e; /* deep navy/charcoal — primary text + dark sections */
+  --color-ink-soft: #3a4a57; /* secondary text */
+  --color-ink-muted: #6b7884; /* tertiary / captions */
+
+  --color-cream: #f6f1e8; /* warm off-white page background */
+  --color-paper: #fdfbf6; /* card surfaces, slightly lighter than cream */
+
+  --color-bronze: #97793f; /* restrained accent */
+  --color-bronze-deep: #7a6230; /* accent on hover / dark bg */
+
+  --color-line: #e2dccf; /* hairline dividers / borders on cream */
+  --color-line-dark: #2c3a45; /* dividers on ink sections */
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+
+  --max-width-content: 1100px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* Respect users who scroll-jump via reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  /* Visible, on-brand focus ring for keyboard users (WCAG AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-bronze);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Section container — centered, generous gutters, capped width */
+  .container-bp {
+    width: 100%;
+    max-width: var(--max-width-content);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  /* Small-caps italic label used between tombstone names + section eyebrows */
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-bronze);
+    font-weight: 600;
+  }
+}
+
+/*
+  Quiet topographic contour motif — used as a faint background behind one
+  section. Pure CSS radial rings, very low contrast, decorative only.
+*/
+.contour {
+  background-image: radial-gradient(
+    ellipse 70% 90% at 80% 20%,
+    color-mix(in srgb, var(--color-bronze) 7%, transparent),
+    transparent 60%
+  );
 }
