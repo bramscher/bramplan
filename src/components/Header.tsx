@@ -1,42 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nav } from "@/lib/site";
+import { Wordmark } from "@/components/Wordmark";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-cream/85 backdrop-blur-sm">
-      <div className="container-bp flex h-16 items-center justify-between">
-        <a
-          href="#top"
-          className="font-serif text-xl font-semibold tracking-tight text-ink"
-        >
-          BramPlan
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled || open
+          ? "border-b border-line bg-cream/90 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <div className="container-bp flex h-16 items-center justify-between sm:h-[4.5rem]">
+        <a href="#top" aria-label="BramPlan — home">
+          <Wordmark />
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-9 md:flex" aria-label="Primary">
           {nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm text-ink-soft transition-colors hover:text-ink"
+              className="link-underline text-sm text-ink-soft transition-colors hover:text-ink"
             >
               {item.label}
             </a>
           ))}
-          <a
-            href="#submit"
-            className="rounded-sm bg-ink px-4 py-2 text-sm font-medium text-cream transition-colors hover:bg-ink-soft"
-          >
+          <a href="#submit" className="btn bg-ink text-cream hover:bg-bronze-deep">
             Submit a Deal
+            <span className="btn-arrow" aria-hidden="true">
+              &rarr;
+            </span>
           </a>
         </nav>
 
         <button
           type="button"
-          className="md:hidden p-2 -mr-2 text-ink"
+          className="-mr-2 cursor-pointer p-2 text-ink md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -68,10 +80,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav
-          className="border-t border-line bg-cream md:hidden"
-          aria-label="Mobile"
-        >
+        <nav className="border-t border-line bg-cream md:hidden" aria-label="Mobile">
           <div className="container-bp flex flex-col py-2">
             {nav.map((item) => (
               <a

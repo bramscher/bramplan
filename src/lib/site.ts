@@ -16,10 +16,31 @@ export const contact = {
 
 export const hero = {
   wordmark: "BramPlan",
+  eyebrow: "Pacific Northwest · Permanent Capital",
+  // Carries forward the original site's strongest line — operator credibility.
+  headline: "Business builders who have been there.",
   subhead:
     "We acquire and operate one exceptional Pacific Northwest business — and we hold it for the long run.",
   trustLine: "Founder-led. Proven closer. Permanent capital.",
 };
+
+// Social proof, surfaced early: the public acquirers our companies exited to.
+export const trustBand = {
+  label: "Companies we built have been acquired by",
+  acquirers: [
+    { name: "Polaris Industries", note: "NYSE: PII" },
+    { name: "Cummins Inc.", note: "NYSE: CMI" },
+    { name: "USWeb", note: "" },
+  ],
+};
+
+// Big-number credibility band.
+export const stats = [
+  { value: "4", label: "Companies built, scaled & exited" },
+  { value: "2", label: "Public-company acquirers" },
+  { value: "1", label: "Business we'll buy and hold" },
+  { value: "PNW", label: "Oregon · Washington · Idaho" },
+];
 
 /*
  * Track record "tombstones" — austere, identical M&A acquisition notices.

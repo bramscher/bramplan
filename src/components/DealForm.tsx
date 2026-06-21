@@ -13,7 +13,7 @@ import { submitDeal } from "@/app/actions";
 
 const labelCls = "block text-xs uppercase tracking-[0.14em] text-ink-muted mb-2";
 const inputCls =
-  "w-full rounded-sm border border-line bg-cream px-3.5 py-2.5 text-ink placeholder:text-ink-muted/60 transition-colors focus:border-bronze focus:bg-paper";
+  "w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-ink placeholder:text-ink-muted/60 transition-colors hover:border-ink/30 focus:border-bronze focus:outline-none focus:ring-2 focus:ring-bronze/20";
 const errCls = "mt-1.5 text-xs text-red-700";
 
 export function DealForm() {
@@ -222,9 +222,14 @@ export function DealForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center justify-center rounded-sm bg-ink px-8 py-3.5 text-sm font-medium text-cream transition-colors hover:bg-ink-soft disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn bg-ink text-cream hover:bg-bronze-deep disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? "Submitting…" : "Submit Deal"}
+          {!isSubmitting && (
+            <span className="btn-arrow" aria-hidden="true">
+              &rarr;
+            </span>
+          )}
         </button>
         <p className="text-xs text-ink-muted">
           Held in strict confidence. We typically respond within two business days.

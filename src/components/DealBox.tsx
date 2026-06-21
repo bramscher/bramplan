@@ -1,54 +1,73 @@
 import { dealBox } from "@/lib/site";
-
-function Criterion({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="border-t border-line-dark py-6 first:border-t-0 first:pt-0 sm:grid sm:grid-cols-[180px_1fr] sm:gap-8">
-      <dt className="text-xs uppercase tracking-[0.18em] text-bronze">
-        {label}
-      </dt>
-      <dd className="mt-1 text-lg leading-relaxed text-cream sm:mt-0">
-        {value}
-      </dd>
-    </div>
-  );
-}
+import { Reveal } from "@/components/Reveal";
 
 export function DealBox() {
+  const rows = [
+    { n: "01", label: "EBITDA", value: dealBox.ebitda },
+    { n: "02", label: "Geography", value: dealBox.geography },
+    { n: "03", label: "Real estate", value: dealBox.realEstate },
+  ];
+
   return (
-    <section id="what-we-buy" className="bg-ink">
-      <div className="container-bp py-20 sm:py-28">
-        <p className="eyebrow">What We Buy</p>
-        <h2 className="mt-3 font-serif text-3xl font-semibold text-cream sm:text-4xl">
-          Our acquisition criteria
-        </h2>
+    <section id="what-we-buy" className="relative overflow-hidden bg-ink">
+      <div
+        aria-hidden="true"
+        className="dot-grid dot-grid-fade pointer-events-none absolute inset-0 opacity-[0.18]"
+      />
+      <div className="container-bp relative py-24 sm:py-32">
+        <Reveal>
+          <p className="eyebrow">What We Buy</p>
+          <h2 className="mt-4 max-w-2xl font-serif text-4xl font-semibold text-cream sm:text-5xl">
+            Our acquisition criteria, in five seconds.
+          </h2>
+        </Reveal>
 
-        <div className="mt-12 border border-line-dark bg-ink-soft/15 p-8 sm:p-12">
-          <dl>
-            <Criterion label="EBITDA" value={dealBox.ebitda} />
-            <Criterion label="Geography" value={dealBox.geography} />
-            <Criterion label="Real estate" value={dealBox.realEstate} />
-          </dl>
-
-          <div className="mt-10 border-t border-line-dark pt-8">
-            <p className="text-xs uppercase tracking-[0.18em] text-ink-muted">
-              Also nice to have
-            </p>
-            <ul className="mt-4 grid gap-x-8 gap-y-2 text-sm text-cream/70 sm:grid-cols-2">
-              {dealBox.niceToHaves.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span aria-hidden="true" className="text-bronze">
-                    &middot;
+        <Reveal delay={120}>
+          <div className="mt-14 border border-line-dark bg-white/[0.03] backdrop-blur-sm">
+            <dl>
+              {rows.map((row) => (
+                <div
+                  key={row.label}
+                  className="grid grid-cols-1 gap-2 border-b border-line-dark px-7 py-8 transition-colors last:border-b-0 hover:bg-white/[0.03] sm:grid-cols-[3.5rem_180px_1fr] sm:items-baseline sm:gap-8 sm:px-10"
+                >
+                  <span className="font-serif text-sm text-bronze-soft/70">
+                    {row.n}
                   </span>
-                  <span>{item}</span>
-                </li>
+                  <dt className="text-xs uppercase tracking-[0.2em] text-bronze-soft">
+                    {row.label}
+                  </dt>
+                  <dd className="text-lg leading-relaxed text-cream sm:text-xl">
+                    {row.value}
+                  </dd>
+                </div>
               ))}
-            </ul>
+            </dl>
           </div>
-        </div>
+        </Reveal>
 
-        <p className="mt-6 max-w-2xl font-serif text-lg italic text-cream/80">
-          {dealBox.reassurance}
-        </p>
+        <Reveal delay={180}>
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-ink-muted">
+                Also nice to have
+              </p>
+              <ul className="mt-4 grid gap-x-10 gap-y-2.5 text-sm text-cream/70 sm:grid-cols-2">
+                {dealBox.niceToHaves.map((item) => (
+                  <li key={item} className="flex gap-2.5">
+                    <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-bronze-soft" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={220}>
+          <p className="mt-12 max-w-2xl border-l-2 border-bronze pl-5 font-serif text-xl italic leading-relaxed text-cream/85">
+            {dealBox.reassurance}
+          </p>
+        </Reveal>
       </div>
     </section>
   );
