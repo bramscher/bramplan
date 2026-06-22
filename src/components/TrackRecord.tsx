@@ -88,6 +88,11 @@ function TombstoneCard({ t }: { t: Tombstone }) {
 
       <div className="mt-9 h-px w-10 bg-line" />
       <p className="mt-4 text-sm tracking-[0.1em] text-ink-soft">{t.year}</p>
+      {t.value && (
+        <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-bronze">
+          {t.value}
+        </p>
+      )}
     </div>
   );
 }

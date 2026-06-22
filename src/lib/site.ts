@@ -36,8 +36,8 @@ export const trustBand = {
 
 // Big-number credibility band.
 export const stats = [
-  { value: "4", label: "Companies built, scaled & exited" },
-  { value: "2", label: "Public-company acquirers" },
+  { value: "5", label: "Successful exits, built or backed" },
+  { value: "4", label: "Public-company acquirers" },
   { value: "1", label: "Business we'll buy and hold" },
   { value: "PNW", label: "Oregon · Washington · Idaho" },
 ];
@@ -54,6 +54,7 @@ export type Tombstone = {
   acquirer: string;
   acquirerNote?: string;
   year: string;
+  value?: string; // deal value where public (e.g. "$78M")
   // Optional: drop an official logo SVG/PNG in /public/logos/ and set the path
   // here (e.g. "/logos/polaris.svg") to render it instead of the monogram.
   companyLogo?: string;
@@ -91,22 +92,20 @@ export const tombstones: Tombstone[] = [
     year: "1996",
   },
   {
-    company: "ELogic",
+    company: "eLogic",
     descriptor: "Investment",
-    acquirer: "[ELOGIC_ACQUIRER]", // who acquired ELogic? (owner to confirm)
-    year: "[ELOGIC_YEAR]", // year ELogic sold (owner to confirm)
+    acquirer: "Reed-Elsevier",
+    year: "2000",
+    value: "$78M",
   },
 ];
 
 // A "private acquirer" / generic / unconfirmed name gets a confidential mark,
-// not a monogram. Detected by a leading article, a lowercase first letter, or
-// an unfilled [PLACEHOLDER].
+// not a monogram. Detected by a leading article ("a private acquirer") or an
+// unfilled [PLACEHOLDER]. (Brand names like "eLogic" start lowercase but are
+// real — they still get a monogram.)
 export function isConfidentialName(name: string): boolean {
-  return (
-    name.startsWith("[") ||
-    /^(a |an |the )/i.test(name) ||
-    name[0] === name[0]?.toLowerCase()
-  );
+  return name.startsWith("[") || /^(a|an|the)\s/i.test(name);
 }
 
 // Derive a monogram (initials) from a company name for the tombstone logo tile.
@@ -116,11 +115,12 @@ export function monogram(name: string): string {
     .trim();
   const words = cleaned.split(/\s+/).filter(Boolean);
   if (words.length === 1) {
-    // Single word: use internal capitals if present (DreamMedia -> DM,
-    // USWeb -> US), otherwise a single initial (Brammo -> B).
-    const caps = words[0].match(/[A-Z]/g);
-    if (caps && caps.length >= 2) return caps.slice(0, 2).join("");
-    return words[0][0]?.toUpperCase() ?? "";
+    // Single word: first letter + any internal capitals (eLogic -> EL,
+    // DreamMedia -> DM, USWeb -> US), otherwise a single initial (Brammo -> B).
+    const w = words[0];
+    const letters = [w[0], ...(w.slice(1).match(/[A-Z]/g) ?? [])];
+    if (letters.length >= 2) return letters.slice(0, 2).join("").toUpperCase();
+    return w[0]?.toUpperCase() ?? "";
   }
   return words
     .slice(0, 2)
