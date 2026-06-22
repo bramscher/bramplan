@@ -44,8 +44,9 @@ export const stats = [
 
 /*
  * Track record "tombstones" — austere, identical M&A acquisition notices.
- * CONFIRM every year. Brammo years are pre-filled per the brief; the other
- * two are placeholders the owner must verify.
+ * Maxperts (1996) and DreamMedia (1997, ~9 months before USWeb's IPO) are
+ * confirmed. Brammo years (2015/2017) are pre-filled per the brief — confirm.
+ * ELogic is an investment exit awaiting acquirer + year ([ELOGIC_*]).
  */
 export type Tombstone = {
   company: string;
@@ -78,21 +79,34 @@ export const tombstones: Tombstone[] = [
   },
   {
     company: "DreamMedia",
-    descriptor: "Digital Agency",
+    descriptor: "Web Technology & Agency",
     acquirer: "USWeb",
-    year: "[DREAMMEDIA_YEAR]", // confirm
+    acquirerNote: "9 months before IPO",
+    year: "1997",
   },
   {
     company: "Maxperts, Inc.",
+    descriptor: "Software & Hardware VAR",
     acquirer: "a private acquirer",
-    year: "[MAXPERTS_YEAR]", // confirm
+    year: "1996",
+  },
+  {
+    company: "ELogic",
+    descriptor: "Investment",
+    acquirer: "[ELOGIC_ACQUIRER]", // who acquired ELogic? (owner to confirm)
+    year: "[ELOGIC_YEAR]", // year ELogic sold (owner to confirm)
   },
 ];
 
-// A "private acquirer" and similar generic names get a confidential mark,
-// not a monogram. Detected by a leading article or a lowercase first letter.
+// A "private acquirer" / generic / unconfirmed name gets a confidential mark,
+// not a monogram. Detected by a leading article, a lowercase first letter, or
+// an unfilled [PLACEHOLDER].
 export function isConfidentialName(name: string): boolean {
-  return /^(a |an |the )/i.test(name) || name[0] === name[0]?.toLowerCase();
+  return (
+    name.startsWith("[") ||
+    /^(a |an |the )/i.test(name) ||
+    name[0] === name[0]?.toLowerCase()
+  );
 }
 
 // Derive a monogram (initials) from a company name for the tombstone logo tile.
