@@ -63,6 +63,7 @@ export const tombstones: Tombstone[] = [
   {
     company: "Brammo",
     descriptor: "Electric Vehicles",
+    companyLogo: "/logos/brammo.png",
     acquirer: "Polaris Industries",
     acquirerNote: "NYSE: PII",
     year: "[BRAMMO_2015]", // pre-filled 2015 in brief — confirm
@@ -70,6 +71,7 @@ export const tombstones: Tombstone[] = [
   {
     company: "Brammo Power",
     descriptor: "Powertrain & Battery Systems",
+    companyLogo: "/logos/brammo-power.png",
     acquirer: "Cummins Inc.",
     acquirerNote: "NYSE: CMI",
     year: "[BRAMMO_2017]", // pre-filled 2017 in brief — confirm
