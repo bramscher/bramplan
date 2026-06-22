@@ -5,13 +5,13 @@ export function About() {
   const hasPhoto = founder.photo && !founder.photo.startsWith("[");
 
   return (
-    <section id="about" className="border-b border-line bg-paper">
+    <section id="about" className="border-b border-line bg-cream">
       <div className="container-bp py-24 sm:py-32">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
           {/* Portrait */}
           <Reveal>
             <figure className="lg:sticky lg:top-28">
-              <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-cream">
+              <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-paper">
                 {hasPhoto ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img

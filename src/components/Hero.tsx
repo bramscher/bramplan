@@ -28,7 +28,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={160}>
-            <p className="mt-6 max-w-2xl font-serif text-2xl italic leading-snug text-bronze-deep sm:text-3xl">
+            <p className="mt-6 max-w-2xl font-serif text-2xl italic leading-snug text-bronze-soft sm:text-3xl">
               {hero.headline}
             </p>
           </Reveal>
@@ -41,7 +41,7 @@ export function Hero() {
 
           <Reveal delay={300}>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a href="#submit" className="btn bg-ink text-cream hover:bg-bronze-deep">
+              <a href="#submit" className="btn btn-primary">
                 Submit a Deal
                 <span className="btn-arrow" aria-hidden="true">
                   &rarr;
@@ -49,7 +49,7 @@ export function Hero() {
               </a>
               <a
                 href="#track-record"
-                className="btn border border-ink/25 text-ink hover:border-ink hover:bg-ink/5"
+                className="btn btn-outline"
               >
                 See Our Track Record
               </a>

@@ -9,7 +9,7 @@ export function DealBox() {
   ];
 
   return (
-    <section id="what-we-buy" className="relative overflow-hidden bg-ink">
+    <section id="what-we-buy" className="relative overflow-hidden bg-cream">
       <div
         aria-hidden="true"
         className="dot-grid dot-grid-fade pointer-events-none absolute inset-0 opacity-[0.18]"
@@ -17,7 +17,7 @@ export function DealBox() {
       <div className="container-bp relative py-24 sm:py-32">
         <Reveal>
           <p className="eyebrow">What We Buy</p>
-          <h2 className="mt-4 max-w-2xl font-serif text-4xl font-semibold text-cream sm:text-5xl">
+          <h2 className="mt-4 max-w-2xl font-serif text-4xl font-semibold text-ink sm:text-5xl">
             Our acquisition criteria, in five seconds.
           </h2>
         </Reveal>
@@ -36,7 +36,7 @@ export function DealBox() {
                   <dt className="text-xs uppercase tracking-[0.2em] text-bronze-soft">
                     {row.label}
                   </dt>
-                  <dd className="text-lg leading-relaxed text-cream sm:text-xl">
+                  <dd className="text-lg leading-relaxed text-ink sm:text-xl">
                     {row.value}
                   </dd>
                 </div>
@@ -51,7 +51,7 @@ export function DealBox() {
               <p className="text-xs uppercase tracking-[0.2em] text-ink-muted">
                 Also nice to have
               </p>
-              <ul className="mt-4 grid gap-x-10 gap-y-2.5 text-sm text-cream/70 sm:grid-cols-2">
+              <ul className="mt-4 grid gap-x-10 gap-y-2.5 text-sm text-ink/70 sm:grid-cols-2">
                 {dealBox.niceToHaves.map((item) => (
                   <li key={item} className="flex gap-2.5">
                     <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-bronze-soft" />
@@ -64,7 +64,7 @@ export function DealBox() {
         </Reveal>
 
         <Reveal delay={220}>
-          <p className="mt-12 max-w-2xl border-l-2 border-bronze pl-5 font-serif text-xl italic leading-relaxed text-cream/85">
+          <p className="mt-12 max-w-2xl border-l-2 border-bronze pl-5 font-serif text-xl italic leading-relaxed text-ink/85">
             {dealBox.reassurance}
           </p>
         </Reveal>

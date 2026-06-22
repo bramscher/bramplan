@@ -1,25 +1,32 @@
 @import "tailwindcss";
 
 /*
-  BramPlan design system v2 — editorial / institutional.
-  High-contrast Didone headlines, warm cream, deep ink, restrained bronze.
-  Modernizes the original bramplan.com (dated dark cards + gradient pills)
-  into a calm, permanent, expensive-feeling search-fund aesthetic.
+  BramPlan design system v3 — "Electric Slate".
+  Dark, tech-forward, confident: near-black charcoal base, off-white text,
+  electric-blue accent. Nods to the founder's EV heritage (Brammo) and the
+  original site's cyan, modernized into a calm, premium dark UI.
+
+  Token names are kept (ink/cream/paper/bronze/line) but re-valued for dark:
+    - ink     = primary foreground (off-white)
+    - cream   = base page background (near-black)
+    - paper   = elevated surface (cards / alternating sections)
+    - bronze  = electric-blue accent (name retained to avoid churn)
+    - line    = hairline borders
 */
 @theme {
-  --color-ink: #0f1a23; /* deep near-black navy — primary + dark sections */
-  --color-ink-soft: #3a4a57; /* secondary text */
-  --color-ink-muted: #6b7884; /* tertiary / captions */
+  --color-ink: #e9ecf1; /* primary text / foreground */
+  --color-ink-soft: #aeb7c2; /* secondary text */
+  --color-ink-muted: #79828f; /* tertiary / captions */
 
-  --color-cream: #f7f2e9; /* warm off-white page background */
-  --color-paper: #fdfbf6; /* card surfaces, slightly lighter than cream */
+  --color-cream: #0e1116; /* base page background (near-black charcoal) */
+  --color-paper: #161b22; /* elevated surface — cards, alt sections */
 
-  --color-bronze: #9a7c41; /* restrained accent */
-  --color-bronze-deep: #7c6231; /* accent on hover / dark bg */
-  --color-bronze-soft: #c4a76a; /* accent on dark backgrounds */
+  --color-bronze: #2e9bff; /* electric-blue accent */
+  --color-bronze-deep: #1e7fe0; /* accent, pressed / deeper */
+  --color-bronze-soft: #7cc0ff; /* accent on dark — numbers, highlights */
 
-  --color-line: #e4ddcf; /* hairline dividers / borders on cream */
-  --color-line-dark: #243441; /* dividers on ink sections */
+  --color-line: #242b34; /* hairline borders on base */
+  --color-line-dark: #2c3540; /* slightly stronger borders on surfaces */
 
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
@@ -32,6 +39,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    background: var(--color-cream);
   }
 
   body {
@@ -51,8 +59,8 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-bronze) 28%, transparent);
-    color: var(--color-ink);
+    background: color-mix(in srgb, var(--color-bronze) 32%, transparent);
+    color: #fff;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -88,7 +96,7 @@
     }
   }
 
-  /* Eyebrow label — small-caps, tracked-out, bronze */
+  /* Eyebrow label — small-caps, tracked-out, electric blue */
   .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -104,7 +112,7 @@
     width: 1.75rem;
     height: 1px;
     background: currentColor;
-    opacity: 0.6;
+    opacity: 0.7;
   }
 
   /* Animated link underline that wipes in from the left */
@@ -127,20 +135,39 @@
     transform: scaleX(1);
   }
 
-  /* Primary + secondary buttons with a trailing arrow micro-interaction */
+  /* Buttons */
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 2px;
+    border-radius: 3px;
     padding: 0.9rem 1.6rem;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition:
       background-color 0.25s var(--ease-out-soft),
       border-color 0.25s var(--ease-out-soft),
-      color 0.25s var(--ease-out-soft);
+      color 0.25s var(--ease-out-soft),
+      box-shadow 0.25s var(--ease-out-soft);
+  }
+  .btn-primary {
+    background: var(--color-bronze);
+    color: #07111c;
+    box-shadow: 0 8px 24px -10px color-mix(in srgb, var(--color-bronze) 70%, transparent);
+  }
+  .btn-primary:hover {
+    background: var(--color-bronze-soft);
+    box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--color-bronze) 85%, transparent);
+  }
+  .btn-outline {
+    border: 1px solid color-mix(in srgb, var(--color-ink) 26%, transparent);
+    color: var(--color-ink);
+  }
+  .btn-outline:hover {
+    border-color: var(--color-bronze);
+    color: var(--color-bronze);
+    background: color-mix(in srgb, var(--color-bronze) 8%, transparent);
   }
   .btn-arrow {
     transition: transform 0.25s var(--ease-out-soft);
@@ -151,12 +178,12 @@
 }
 
 /*
-  Dot-grid motif — a refined nod to the original site's pixelated wordmark.
-  Faint bronze dots, masked to fade out so they read as texture, not pattern.
+  Dot-grid motif — refined nod to the original site's pixelated wordmark.
+  Electric-blue dots, masked to fade so they read as texture, not pattern.
 */
 .dot-grid {
   background-image: radial-gradient(
-    color-mix(in srgb, var(--color-bronze) 38%, transparent) 1px,
+    color-mix(in srgb, var(--color-bronze) 55%, transparent) 1px,
     transparent 1.4px
   );
   background-size: 24px 24px;

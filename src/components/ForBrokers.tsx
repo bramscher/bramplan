@@ -18,7 +18,7 @@ const icons = [
 
 export function ForBrokers() {
   return (
-    <section id="for-brokers" className="border-b border-line bg-paper">
+    <section id="for-brokers" className="border-b border-line bg-cream">
       <div className="container-bp py-24 sm:py-32">
         <Reveal>
           <p className="eyebrow">For Brokers</p>
@@ -30,7 +30,7 @@ export function ForBrokers() {
         <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {brokerReasons.map((reason, i) => (
             <Reveal key={reason.title} delay={(i % 3) * 70}>
-              <div className="flex h-full flex-col gap-4 bg-cream p-8 transition-colors duration-300 hover:bg-paper">
+              <div className="flex h-full flex-col gap-4 bg-paper p-8 transition-colors duration-300 hover:bg-[#1c232d]">
                 <svg
                   width="26"
                   height="26"
@@ -55,14 +55,14 @@ export function ForBrokers() {
             </Reveal>
           ))}
 
-          {/* Filler cell to complete the grid on lg (5 reasons + 1) */}
-          <div className="hidden bg-ink p-8 lg:flex lg:flex-col lg:justify-center">
-            <p className="font-serif text-xl italic leading-snug text-cream">
+          {/* Filler cell to complete the grid on lg (5 reasons + 1) — electric CTA */}
+          <div className="hidden bg-bronze p-8 lg:flex lg:flex-col lg:justify-center">
+            <p className="font-serif text-xl italic leading-snug text-[#07111c]">
               One good deal is all it takes.
             </p>
             <a
               href="#submit"
-              className="link-underline mt-4 inline-flex w-fit items-center gap-2 text-sm font-medium text-bronze-soft"
+              className="link-underline mt-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#07111c]"
             >
               Submit a Deal
               <span aria-hidden="true">&rarr;</span>

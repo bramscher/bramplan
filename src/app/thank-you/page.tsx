@@ -21,7 +21,7 @@ export default function ThankYou() {
         </p>
         <Link
           href="/"
-          className="mt-10 inline-flex items-center justify-center rounded-sm border border-ink/25 px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:border-ink hover:bg-ink/5"
+          className="btn btn-outline mt-10"
         >
           Back to home
         </Link>

@@ -13,8 +13,8 @@ import { submitDeal } from "@/app/actions";
 
 const labelCls = "block text-xs uppercase tracking-[0.14em] text-ink-muted mb-2";
 const inputCls =
-  "w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-ink placeholder:text-ink-muted/60 transition-colors hover:border-ink/30 focus:border-bronze focus:outline-none focus:ring-2 focus:ring-bronze/20";
-const errCls = "mt-1.5 text-xs text-red-700";
+  "w-full rounded-sm border border-line bg-cream px-3.5 py-2.5 text-ink placeholder:text-ink-muted/60 transition-colors hover:border-ink/30 focus:border-bronze focus:outline-none focus:ring-2 focus:ring-bronze/25";
+const errCls = "mt-1.5 text-xs text-red-400";
 
 export function DealForm() {
   const router = useRouter();
@@ -213,7 +213,7 @@ export function DealForm() {
       </div>
 
       {serverError && (
-        <p className="mt-6 rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+        <p className="mt-6 rounded-sm border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           {serverError}
         </p>
       )}
@@ -222,7 +222,7 @@ export function DealForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn bg-ink text-cream hover:bg-bronze-deep disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? "Submitting…" : "Submit Deal"}
           {!isSubmitting && (

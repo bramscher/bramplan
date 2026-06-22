@@ -38,7 +38,7 @@ export function Header() {
               {item.label}
             </a>
           ))}
-          <a href="#submit" className="btn bg-ink text-cream hover:bg-bronze-deep">
+          <a href="#submit" className="btn btn-primary">
             Submit a Deal
             <span className="btn-arrow" aria-hidden="true">
               &rarr;
@@ -94,7 +94,7 @@ export function Header() {
             ))}
             <a
               href="#submit"
-              className="mt-2 mb-3 rounded-sm bg-ink px-4 py-3 text-center text-sm font-medium text-cream"
+              className="btn btn-primary mt-2 mb-3 justify-center"
               onClick={() => setOpen(false)}
             >
               Submit a Deal

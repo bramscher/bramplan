@@ -5,8 +5,12 @@ Bend, Oregon. Built for **business brokers and M&A intermediaries** in the
 Pacific Northwest: it establishes credibility (exit track record), states
 acquisition criteria plainly, and makes it easy to submit a deal in confidence.
 
-Single landing page + a `/thank-you` confirmation. Calm, restrained
-search-fund aesthetic: deep ink, warm cream, one bronze accent, serif headlines.
+Single landing page + a `/thank-you` confirmation. **"Electric Slate"** aesthetic:
+dark charcoal base, off-white text, an electric-blue accent, and high-contrast
+Playfair Display headlines — a modern, tech-forward nod to the founder's EV
+heritage. The Tailwind theme tokens (`ink`/`cream`/`paper`/`bronze`/`line` in
+`globals.css`) are re-valued for this dark scheme; `bronze` is the electric-blue
+accent (name kept to avoid churn).
 
 ## Stack
 - **Next.js 16** (App Router) + **TypeScript**
