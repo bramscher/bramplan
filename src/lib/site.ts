@@ -96,7 +96,6 @@ export const tombstones: Tombstone[] = [
     descriptor: "Investment",
     acquirer: "Reed-Elsevier",
     year: "2000",
-    value: "$78M",
   },
 ];
 
