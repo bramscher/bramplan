@@ -53,6 +53,10 @@ export type Tombstone = {
   acquirer: string;
   acquirerNote?: string;
   year: string;
+  // Optional: drop an official logo SVG/PNG in /public/logos/ and set the path
+  // here (e.g. "/logos/polaris.svg") to render it instead of the monogram.
+  companyLogo?: string;
+  acquirerLogo?: string;
 };
 
 export const tombstones: Tombstone[] = [
@@ -72,6 +76,7 @@ export const tombstones: Tombstone[] = [
   },
   {
     company: "DreamMedia",
+    descriptor: "Digital Agency",
     acquirer: "USWeb",
     year: "[DREAMMEDIA_YEAR]", // confirm
   },
@@ -81,6 +86,52 @@ export const tombstones: Tombstone[] = [
     year: "[MAXPERTS_YEAR]", // confirm
   },
 ];
+
+// A "private acquirer" and similar generic names get a confidential mark,
+// not a monogram. Detected by a leading article or a lowercase first letter.
+export function isConfidentialName(name: string): boolean {
+  return /^(a |an |the )/i.test(name) || name[0] === name[0]?.toLowerCase();
+}
+
+// Derive a monogram (initials) from a company name for the tombstone logo tile.
+export function monogram(name: string): string {
+  const cleaned = name
+    .replace(/,?\s+(Inc\.?|L\.?L\.?C\.?|Co\.?|Corp\.?|Ltd\.?)$/i, "")
+    .trim();
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  if (words.length === 1) {
+    // Single word: use internal capitals if present (DreamMedia -> DM,
+    // USWeb -> US), otherwise a single initial (Brammo -> B).
+    const caps = words[0].match(/[A-Z]/g);
+    if (caps && caps.length >= 2) return caps.slice(0, 2).join("");
+    return words[0][0]?.toUpperCase() ?? "";
+  }
+  return words
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+}
+
+export const founder = {
+  eyebrow: "The Operator",
+  heading: "You're dealing with someone who has sat on your side of the table.",
+  name: "Craig Bramscher",
+  role: "Founder, BramPlan",
+  // Drop a headshot in /public (e.g. /founder.jpg) and set the path here.
+  photo: "[FOUNDER_PHOTO]",
+  bio: [
+    "Craig founded and ran Brammo, the Oregon electric-vehicle company whose businesses were acquired by Polaris Industries and Cummins. Before that he built and sold companies — including DreamMedia, acquired by USWeb.",
+    "He has been the founder preparing a company for sale, negotiating with public-company acquirers, and carrying a business through transition. BramPlan is where he now does the buying: acquiring and operating one exceptional Pacific Northwest business for the long run.",
+  ],
+  credentials: [
+    "Multiple exits to public-company acquirers",
+    "An operator, not just an investor — he runs what he buys",
+    "Based in Bend, Oregon, focused on the Pacific Northwest",
+  ],
+  pullQuote:
+    "I've built companies, scaled them, and sold them. Now I buy one — and hold it.",
+};
 
 export const dealBox = {
   ebitda: "$1.0M – $1.5M",
@@ -134,5 +185,6 @@ export const nav = [
   { label: "Track Record", href: "#track-record" },
   { label: "What We Buy", href: "#what-we-buy" },
   { label: "Portfolio", href: "#portfolio" },
+  { label: "Founder", href: "#about" },
   { label: "For Brokers", href: "#for-brokers" },
 ];

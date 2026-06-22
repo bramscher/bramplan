@@ -1,5 +1,57 @@
-import { tombstones, type Tombstone } from "@/lib/site";
+import {
+  tombstones,
+  monogram,
+  isConfidentialName,
+  type Tombstone,
+} from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
+
+/** Logo image if provided; a confidential lock for private acquirers;
+ *  otherwise a refined serif monogram tile. */
+function BrandMark({ name, logo }: { name: string; logo?: string }) {
+  if (logo) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={logo}
+        alt={`${name} logo`}
+        className="mx-auto h-9 w-auto object-contain"
+      />
+    );
+  }
+
+  if (isConfidentialName(name)) {
+    return (
+      <span
+        aria-hidden="true"
+        className="mx-auto flex h-11 w-11 items-center justify-center border border-line text-bronze transition-colors group-hover:border-bronze/60"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="5" y="11" width="14" height="9" rx="1.5" />
+          <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+        </svg>
+      </span>
+    );
+  }
+
+  return (
+    <span
+      aria-hidden="true"
+      className="mx-auto flex h-11 w-11 items-center justify-center border border-line font-serif text-base font-semibold tracking-tight text-bronze transition-colors group-hover:border-bronze/60"
+    >
+      {monogram(name)}
+    </span>
+  );
+}
 
 function TombstoneCard({ t }: { t: Tombstone }) {
   return (
@@ -10,7 +62,8 @@ function TombstoneCard({ t }: { t: Tombstone }) {
       <span className="absolute bottom-3 left-3 h-3 w-3 border-b border-l border-line transition-colors group-hover:border-bronze/60" />
       <span className="absolute bottom-3 right-3 h-3 w-3 border-b border-r border-line transition-colors group-hover:border-bronze/60" />
 
-      <p className="font-serif text-2xl font-semibold text-ink sm:text-[1.7rem]">
+      <BrandMark name={t.company} logo={t.companyLogo} />
+      <p className="mt-4 font-serif text-2xl font-semibold text-ink sm:text-[1.7rem]">
         {t.company}
       </p>
       {t.descriptor && (
@@ -23,7 +76,8 @@ function TombstoneCard({ t }: { t: Tombstone }) {
         has been acquired by
       </p>
 
-      <p className="font-serif text-2xl font-semibold text-ink sm:text-[1.7rem]">
+      <BrandMark name={t.acquirer} logo={t.acquirerLogo} />
+      <p className="mt-4 font-serif text-2xl font-semibold text-ink sm:text-[1.7rem]">
         {t.acquirer}
       </p>
       {t.acquirerNote && (

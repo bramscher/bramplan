@@ -5,6 +5,7 @@ import { TrackRecord } from "@/components/TrackRecord";
 import { Stats } from "@/components/Stats";
 import { DealBox } from "@/components/DealBox";
 import { Portfolio } from "@/components/Portfolio";
+import { About } from "@/components/About";
 import { ForBrokers } from "@/components/ForBrokers";
 import { Submit } from "@/components/Submit";
 import { Footer } from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
         <Stats />
         <DealBox />
         <Portfolio />
+        <About />
         <ForBrokers />
         <Submit />
       </main>
