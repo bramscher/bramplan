@@ -44,9 +44,9 @@ export const stats = [
 
 /*
  * Track record "tombstones" — austere, identical M&A acquisition notices.
- * Maxperts (1996) and DreamMedia (1997, ~9 months before USWeb's IPO) are
- * confirmed. Brammo years (2015/2017) are pre-filled per the brief — confirm.
- * ELogic is an investment exit awaiting acquirer + year ([ELOGIC_*]).
+ * All years confirmed: Brammo→Polaris (2015), Brammo Power→Cummins (2017),
+ * DreamMedia→USWeb (1997, ~9 months before USWeb's IPO), Maxperts (1996),
+ * eLogic→Reed-Elsevier (2000, investment exit).
  */
 export type Tombstone = {
   company: string;
@@ -68,7 +68,7 @@ export const tombstones: Tombstone[] = [
     companyLogo: "/logos/brammo.png",
     acquirer: "Polaris Industries",
     acquirerNote: "NYSE: PII",
-    year: "[BRAMMO_2015]", // pre-filled 2015 in brief — confirm
+    year: "2015",
   },
   {
     company: "Brammo Power",
@@ -76,7 +76,7 @@ export const tombstones: Tombstone[] = [
     companyLogo: "/logos/brammo-power.png",
     acquirer: "Cummins Inc.",
     acquirerNote: "NYSE: CMI",
-    year: "[BRAMMO_2017]", // pre-filled 2017 in brief — confirm
+    year: "2017",
   },
   {
     company: "DreamMedia",
